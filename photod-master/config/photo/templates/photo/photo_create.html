@@ -6,9 +6,10 @@
 		<div class="alert alert-primary" role="alert">
 			모든 부분을 다 채워넣어주세요!!
 		</div>
-		<form action="" method="post" enctype="multipart/form-data">
-			{% csrf_token %}
-
+		<!-- form을 사용해서 입력창 생성 -->
+		<form action="" method="post" enctype="multipart/form-data"> <!-- 
+			html의 form형태는 text파일로 인지. 데이터 형식을 입력한다고 알려줌. -->
+			{% csrf_token %} <!-- 보안문제 해결 -->
 			{{form.as_p}}
 			<input type="submit" value="Upload" class="btn btn-primary">
 		</form>

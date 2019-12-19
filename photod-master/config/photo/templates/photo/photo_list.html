@@ -9,7 +9,7 @@
 		<div class ="col"></div>
 		<div class = "col-5">
 			{% for object in object_list %}
-
+			<!-- for문으로 models를 통해 생성된 object의 list를 하나씩 가지고 옴. -->
 			<div class ="card">
 				<div class = "card-header">
 					{{ object.author }}
@@ -20,8 +20,18 @@
 						<p class = "card-text"> {{ object.text }} </p>
 					</div>
 				<ul class = "list-group list-group-flush">
+
+					<li class="list-group-item">
+						<a href="{% url 'photo:like' object.id %}" class="float-left btn-like {% if user in object.like.all %} active {% endif %}">좋아요!</a>
+						<!-- 만약 좋아요한 유저가 있으면 아이콘 active -->
+						{% if object.like.all.count %}
+						<span class="float-left">
+							{{object.like.all.count}} <!-- 좋아요 카운트 -->
+						</span>
+						{% endif %}
+						<a href="{% url 'photo:favorite' object.id %}" class="float-right btn-favorite {% if user in object.favorite.all %} active{% endif %}">저장하기!</a>
+					</li>
 					
-					<li class = "list-group-item">수정일 : {{ object.update }}</li>
 					<li class = "list-group-item">생성일 : {{ object.created }}</li>
 				</ul>
 				<div class = "card-body">
